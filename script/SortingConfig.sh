@@ -2,6 +2,11 @@
 
 # --------------------------------------------------
 
+# Source
+source "$ZD_ScriptLibPath/createPath.sh"
+
+# --------------------------------------------------
+
 cd "$WRT_MainPath/"
 
 echo '--------------------------------------------------'
@@ -14,7 +19,7 @@ echo ''
 # ! 越重要配置越放在后面
 
 # 创建默认配置
-defaultConfigPath="$CI_VirtualPath/DefaultConfig"
+defaultConfigPath=$(createTempPath 'DefaultConfig:file')
 touch "$defaultConfigPath"
 
 # 添加 Wrt 配置
@@ -28,3 +33,6 @@ cat "$CI_ConfigPath/CustomConfig" >>"$defaultConfigPath"
 
 # 替换配置
 cat "$defaultConfigPath" >"$WRT_ConfigPath"
+
+# 删除文件
+rm -f "$defaultConfigPath"

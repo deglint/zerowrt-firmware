@@ -11,6 +11,14 @@ cd "$WRT_MainPath/"
 
 [[ -z "$ZeroDream_Secret" ]] && exit 0
 
+# PackFirmwareModule
+outputPath="$CI_TempPath/PackFirmwareModule" && mkdir -p "$outputPath"
+"$CI_AppPath/PackFirmwareModule-linux-amd64" \
+  --dataPath "$WRT_MainPath/bin" \
+  --configPath "$WRT_ConfigPath" \
+  --outputPath "$outputPath"
+(($? != 0)) && [[ "$ZD_Owner" == "$CI_Owner" ]] && exit 2
+
 # --------------------------------------------------
 
 exit 0

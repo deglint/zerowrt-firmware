@@ -16,6 +16,9 @@ tar -czvf "$ZD_ReleaseUploadPath/$WRT_NAME-OpenwrtBin-$WRT_CONFIG-$ZD_DATE.tar.g
   --exclude='*.ubi' \
   -C "$WRT_MainPath" \
   'bin'
+tar -czvf "$ZD_ReleaseUploadPath/$WRT_NAME-OpenwrtModule-$WRT_CONFIG-$ZD_DATE.tar.gz" \
+  -C "$CI_TempPath" \
+  'PackFirmwareModule'
 find "$WRT_MainPath/bin/targets/" \
   -iregex ".*\(buildinfo\|json\|sha256sums\|packages\)$" \
   -exec rm -rf {} +
