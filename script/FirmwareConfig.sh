@@ -34,7 +34,7 @@ echo 'Successful: addSkbRecyclerConfig'
 echo ''
 
 # 添加固件通用配置
-cat "$CI_ConfigPath/Platform/GeneralConfig" >>"$WRT_ConfigPath"
+cat "$CI_ConfigPath/GeneralConfig" >>"$WRT_ConfigPath"
 
 # 添加高通平台配置
 if [[ "${WRT_TARGET^^}" == *"QUALCOMMAX"* ]]; then

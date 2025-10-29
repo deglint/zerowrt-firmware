@@ -7,11 +7,8 @@ cd "$WRT_MainPath/"
 
 # --------------------------------------------------
 
-# OutputPath
-outputPath="$ZD_ArtifactUploadPath/Output" && mkdir -p "$outputPath"
-
 # OutputAnalyzeFile
-analyzePath="$outputPath/Analyze" && mkdir -p "$analyzePath"
+analyzePath="$ZD_ArtifactUploadPath/VirtualAnalyze" && mkdir -p "$analyzePath"
 [[ -f "$WRT_ConfigPath" ]] && cp -a "$WRT_ConfigPath" "$analyzePath/$WRT_NAME-WrtConfig-$WRT_CONFIG-$ZD_DATE"
 [[ -f "$CI_VirtualPath/CoreConfig" ]] && cp -a "$CI_VirtualPath/CoreConfig" "$analyzePath/$WRT_NAME-CoreConfig-$WRT_CONFIG-$ZD_DATE"
 [[ -f "$CI_VirtualPath/VirtualConfig" ]] && cp -a "$CI_VirtualPath/VirtualConfig" "$analyzePath/$WRT_NAME-VirtualConfig-$WRT_CONFIG-$ZD_DATE"

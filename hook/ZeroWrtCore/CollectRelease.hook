@@ -5,18 +5,26 @@
 
 cd "$WRT_MainPath/"
 
-[[ "$WRT_ONLY_CONFIG" == 'true' ]] && exit 0
-
 # --------------------------------------------------
 
+# CheckExit
+[[ "$WRT_ONLY_CONFIG" == 'true' ]] && exit 0
+
+# CollectPath
+collectPath="$ZD_ReleaseUploadPath"
+if [[ "$WRT_TEST" == 'true' ]]; then
+  releasePath="$ZD_ArtifactUploadPath/Release" && mkdir -p "$releasePath"
+  collectPath="$releasePath"
+fi
+
 # CollectRelease
-cp -f "$WRT_ConfigPath" "$ZD_ReleaseUploadPath/$WRT_NAME-Config-$WRT_CONFIG-$ZD_DATE"
-tar -czvf "$ZD_ReleaseUploadPath/$WRT_NAME-OpenwrtBin-$WRT_CONFIG-$ZD_DATE.tar.gz" \
+cp -f "$WRT_ConfigPath" "$collectPath/$WRT_NAME-Config-$WRT_CONFIG-$ZD_DATE"
+tar -czvf "$collectPath/$WRT_NAME-OpenwrtBin-$WRT_CONFIG-$ZD_DATE.tar.gz" \
   --exclude='*.bin' \
   --exclude='*.ubi' \
   -C "$WRT_MainPath" \
   'bin'
-tar -czvf "$ZD_ReleaseUploadPath/$WRT_NAME-OpenwrtModule-$WRT_CONFIG-$ZD_DATE.tar.gz" \
+tar -czvf "$collectPath/$WRT_NAME-OpenwrtModule-$WRT_CONFIG-$ZD_DATE.tar.gz" \
   -C "$CI_TempPath" \
   'PackFirmwareModule'
 find "$WRT_MainPath/bin/targets/" \
@@ -26,10 +34,13 @@ for FILE in $(find "$WRT_MainPath/bin/targets/" -type f -iname "*$WRT_TARGET*");
   EXT=$(basename $FILE | cut -d '.' -f 2-)
   NAME=$(basename $FILE | cut -d '.' -f 1 | grep -io "\($WRT_TARGET\).*")
   NEW_FILE="$WRT_NAME-$NAME-$ZD_DATE.$EXT"
-  mv -f $FILE "$ZD_ReleaseUploadPath/$NEW_FILE"
+  mv -f $FILE "$collectPath/$NEW_FILE"
 done
 find "$WRT_MainPath/bin/targets/" -type f \
-  -exec mv -f {} "$ZD_ReleaseUploadPath/" \;
+  -exec mv -f {} "$collectPath/" \;
+
+# CheckExit
+[[ "$WRT_TEST" == 'true' ]] && exit 0
 
 # ReleaseBody
 cat > "$CI_ReleaseBodyPath" <<- EOF

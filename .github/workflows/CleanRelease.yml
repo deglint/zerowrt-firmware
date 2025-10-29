@@ -6,13 +6,10 @@ permissions: write-all
 
 # CI 计划
 on:
-  # 自动运行: 当 CompileZeroWrt 完成后
-  workflow_run:
-    workflows: ["CompileZeroWrt"]
-    types:
-      - completed
   # 手动运行
   workflow_dispatch:
+  # 工作流调用
+  workflow_call:
 
 # CI 环境
 env:
