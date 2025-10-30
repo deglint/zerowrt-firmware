@@ -3,7 +3,7 @@
 # --------------------------------------------------
 
 # AptGetInstall
-sudo -E apt-get -yqq install tar
+sudo -E apt -yqq install tar
 
 # CreateMntBuildDir
 sudo mkdir -p '/mnt/build_wrt'
