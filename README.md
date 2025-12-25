@@ -48,4 +48,6 @@ script ------ 脚本目录
 
 storage ------ 储存目录
 
+backup ------ 备份目录
+
 openwrt ------ 数据覆盖目录

@@ -69,6 +69,15 @@ if [ -f "$COREMARK_FILE" ]; then
 	echo ''
 fi
 
+# 修复 99_netspeedtest 文件残留的问题
+cd "$pkgPath"
+if [ -d *"luci-app-netspeedtest"* ]; then
+	cd ./luci-app-netspeedtest/
+	sed -i '$a\exit 0' ./netspeedtest/files/99_netspeedtest.defaults
+	echo "Fixed: netspeedtest"
+	echo ''
+fi
+
 # --------------------------------------------------
 
 # 临时修复 nss-firmware 校验不通过
