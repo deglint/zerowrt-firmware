@@ -51,6 +51,7 @@ UPDATE_PACKAGE() {
 # 这样会把原有的 open-app-filter, luci-app-appfilter, oaf 相关组件删除，不会出现 coremark 错误
 
 UPDATE_PACKAGE "argon" "sbwml/luci-theme-argon" "openwrt-25.12"
+UPDATE_PACKAGE "aurora" "eamonxg/luci-theme-aurora" "master"
 UPDATE_PACKAGE "partexp" "sirpdboy/luci-app-partexp" "main"
 UPDATE_PACKAGE "diskman" "lisaac/luci-app-diskman" "master"
 UPDATE_PACKAGE "viking" "VIKINGYFY/packages" "main" "" "luci-app-timewol luci-app-wolplus"
