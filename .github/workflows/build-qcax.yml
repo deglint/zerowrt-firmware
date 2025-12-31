@@ -52,7 +52,7 @@ jobs:
       # 源码链接
       WRT_REPO: https://github.com/${{matrix.SOURCE}}.git
       # 默认主题
-      WRT_THEME: argon
+      WRT_THEME: aurora
       # 默认主机名
       WRT_HOST: ImmortalWrt
       # 默认 WiFi 名称
